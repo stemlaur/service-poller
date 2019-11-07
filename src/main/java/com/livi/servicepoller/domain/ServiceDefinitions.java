@@ -1,5 +1,8 @@
 package com.livi.servicepoller.domain;
 
+import java.util.Collection;
+import java.util.Set;
+
 public final class ServiceDefinitions {
     private final ServiceDefinitionRepository repository;
 
@@ -20,5 +23,9 @@ public final class ServiceDefinitions {
         } else {
             return null;
         }
+    }
+
+    public Set<ServiceDefinition> findAll() {
+        return this.repository.findAll();
     }
 }

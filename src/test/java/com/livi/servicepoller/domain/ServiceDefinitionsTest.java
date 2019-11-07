@@ -6,6 +6,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.Collections;
+import java.util.Set;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.*;
@@ -50,5 +53,14 @@ public class ServiceDefinitionsTest {
         when(this.serviceDefinitionRepository.exists(URL_NAME)).thenReturn(false);
         final ServiceDefinition actual = this.serviceDefinitions.find(URL_NAME);
         assertNull(actual);
+    }
+
+    @Test
+    public void should_return_the_set_of_definitions() {
+        when(this.serviceDefinitionRepository.findAll())
+                .thenReturn(Collections.singleton(new ServiceDefinition(URL_NAME)));
+        final Set<ServiceDefinition> actual = this.serviceDefinitions.findAll();
+        final Set<ServiceDefinition> expected = Collections.singleton(new ServiceDefinition(URL_NAME));
+        assertEquals(expected, actual);
     }
 }
