@@ -19,11 +19,13 @@ public class ServiceDefinitionsTest {
     private ServiceDefinitions serviceDefinitions;
 
     @Mock
+    private ServicePollerInstrumentation instrumentation;
+    @Mock
     private ServiceDefinitionRepository serviceDefinitionRepository;
 
     @Before
     public void setUp() {
-        this.serviceDefinitions = new ServiceDefinitions(this.serviceDefinitionRepository);
+        this.serviceDefinitions = new ServiceDefinitions(instrumentation, this.serviceDefinitionRepository);
     }
 
     @Test

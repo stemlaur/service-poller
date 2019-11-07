@@ -14,6 +14,9 @@ import static org.mockito.Mockito.*;
 public final class ServiceMonitorTest {
     public static final String URL_NAME = "https://www.livi.fr/";
     private ServiceMonitor serviceMonitor;
+
+    @Mock
+    private ServicePollerInstrumentation instrumentation;
     @Mock
     private EventBus eventBus;
     @Mock
@@ -25,7 +28,7 @@ public final class ServiceMonitorTest {
 
     @Before
     public void setUp() {
-        this.serviceMonitor = new ServiceMonitor(this.eventBus, this.serviceDefinitions, this.serviceStatuses, this.serviceHealth);
+        this.serviceMonitor = new ServiceMonitor(instrumentation, this.eventBus, this.serviceDefinitions, this.serviceStatuses, this.serviceHealth);
     }
 
     @Test
