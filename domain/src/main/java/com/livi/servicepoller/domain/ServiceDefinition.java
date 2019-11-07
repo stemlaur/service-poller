@@ -1,6 +1,7 @@
 package com.livi.servicepoller.domain;
 
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.apache.commons.lang3.Validate;
 
 /**
@@ -8,6 +9,7 @@ import org.apache.commons.lang3.Validate;
  * A service is unique regarding its urlName.
  */
 @EqualsAndHashCode
+@ToString
 public final class ServiceDefinition {
     private final String urlName;
 
