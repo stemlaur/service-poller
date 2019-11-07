@@ -1,5 +1,9 @@
 package com.livi.servicepoller.domain;
 
+/**
+ * The service monitor is responsible of call heath check for each
+ * services definition and publishes whether a status has changed.
+ */
 public final class ServiceMonitor {
     private final EventBus eventBus;
     private final ServiceDefinitions serviceDefinitions;
