@@ -7,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -42,5 +43,12 @@ public class ServiceDefinitionsTest {
         final ServiceDefinition actual = this.serviceDefinitions.get(URL_NAME);
         final ServiceDefinition expected = new ServiceDefinition(URL_NAME);
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void should_return_null_when_definition_does_not_exist() {
+        when(this.serviceDefinitionRepository.exists(URL_NAME)).thenReturn(false);
+        final ServiceDefinition actual = this.serviceDefinitions.get(URL_NAME);
+        assertNull(actual);
     }
 }
