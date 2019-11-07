@@ -6,7 +6,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.net.URL;
 import java.util.Collections;
 
 import static org.mockito.Mockito.*;
@@ -38,5 +37,16 @@ public final class ServiceMonitorTest {
         this.serviceMonitor.checkStatuses();
 
         verify(eventBus, times(1)).publish(new StatusChanged(URL_NAME, Status.OK));
+    }
+
+    @Test
+    public void should_not_emit_status_changed_when_current_status_is_the_same() {
+        when(this.serviceDefinitions.findAll()).thenReturn(Collections.singleton(new ServiceDefinition("https://www.livi.fr/")));
+        when(this.serviceStatuses.find(URL_NAME)).thenReturn(Status.OK);
+        when(this.serviceHealth.check("https://www.livi.fr/")).thenReturn(Status.OK);
+
+        this.serviceMonitor.checkStatuses();
+
+        verify(eventBus, never()).publish(any());
     }
 }
