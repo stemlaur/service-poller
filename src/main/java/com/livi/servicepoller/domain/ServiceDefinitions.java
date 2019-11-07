@@ -3,7 +3,7 @@ package com.livi.servicepoller.domain;
 import java.util.Collection;
 import java.util.Set;
 
-public final class ServiceDefinitions {
+public class ServiceDefinitions {
     private final ServiceDefinitionRepository repository;
 
     public ServiceDefinitions(final ServiceDefinitionRepository repository) {
