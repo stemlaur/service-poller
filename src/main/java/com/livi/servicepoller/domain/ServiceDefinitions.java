@@ -14,7 +14,7 @@ public final class ServiceDefinitions {
         }
     }
 
-    public ServiceDefinition get(final String urlName) {
+    public ServiceDefinition find(final String urlName) {
         if (this.repository.exists(urlName)) {
             return new ServiceDefinition(urlName);
         } else {

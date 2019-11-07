@@ -40,7 +40,7 @@ public class ServiceDefinitionsTest {
     @Test
     public void should_retrieve_definition_when_exists() {
         when(this.serviceDefinitionRepository.exists(URL_NAME)).thenReturn(true);
-        final ServiceDefinition actual = this.serviceDefinitions.get(URL_NAME);
+        final ServiceDefinition actual = this.serviceDefinitions.find(URL_NAME);
         final ServiceDefinition expected = new ServiceDefinition(URL_NAME);
         assertEquals(expected, actual);
     }
@@ -48,7 +48,7 @@ public class ServiceDefinitionsTest {
     @Test
     public void should_return_null_when_definition_does_not_exist() {
         when(this.serviceDefinitionRepository.exists(URL_NAME)).thenReturn(false);
-        final ServiceDefinition actual = this.serviceDefinitions.get(URL_NAME);
+        final ServiceDefinition actual = this.serviceDefinitions.find(URL_NAME);
         assertNull(actual);
     }
 }
