@@ -10,7 +10,9 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ServiceDefinitionsTest {
+    private static final String URL_NAME = "https://amazon.com";
     private ServiceDefinitions serviceDefinitions;
+
     @Mock
     private ServiceDefinitionRepository serviceDefinitionRepository;
 
@@ -24,6 +26,12 @@ public class ServiceDefinitionsTest {
         when(this.serviceDefinitionRepository.exists("https://amazon.com")).thenReturn(true);
         this.serviceDefinitions.create(new ServiceDefinition("https://amazon.com"));
         verify(this.serviceDefinitionRepository, never()).save(any());
+    }
 
+    @Test
+    public void should_create_a_definition_when_doesnot_exist() {
+        when(this.serviceDefinitionRepository.exists(URL_NAME)).thenReturn(false);
+        this.serviceDefinitions.create(new ServiceDefinition("https://amazon.com"));
+        verify(this.serviceDefinitionRepository, times(1)).save(any());
     }
 }
