@@ -49,4 +49,26 @@ public final class ServiceMonitorTest {
 
         verify(eventBus, never()).publish(any());
     }
+
+    @Test
+    public void should_store_new_status_when_current_status_is_different() {
+        when(this.serviceDefinitions.findAll()).thenReturn(Collections.singleton(new ServiceDefinition("https://www.livi.fr/")));
+        when(this.serviceStatuses.find(URL_NAME)).thenReturn(Status.UKNOWN);
+        when(this.serviceHealth.check("https://www.livi.fr/")).thenReturn(Status.OK);
+
+        this.serviceMonitor.checkStatuses();
+
+        verify(this.serviceStatuses, times(1)).save(URL_NAME, Status.OK);
+    }
+
+    @Test
+    public void should_not_store_new_status_when_current_status_is_the_same() {
+        when(this.serviceDefinitions.findAll()).thenReturn(Collections.singleton(new ServiceDefinition("https://www.livi.fr/")));
+        when(this.serviceStatuses.find(URL_NAME)).thenReturn(Status.OK);
+        when(this.serviceHealth.check("https://www.livi.fr/")).thenReturn(Status.OK);
+
+        this.serviceMonitor.checkStatuses();
+
+        verify(this.serviceStatuses, never()).save(any(), any());
+    }
 }
