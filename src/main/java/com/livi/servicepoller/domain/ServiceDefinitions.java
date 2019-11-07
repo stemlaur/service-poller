@@ -13,4 +13,8 @@ public final class ServiceDefinitions {
             this.repository.save(definition);
         }
     }
+
+    public ServiceDefinition get(final String urlName) {
+        return new ServiceDefinition(urlName);
+    }
 }

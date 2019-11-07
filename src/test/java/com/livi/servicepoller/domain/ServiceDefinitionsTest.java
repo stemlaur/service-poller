@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -23,7 +24,7 @@ public class ServiceDefinitionsTest {
 
     @Test
     public void should_not_create_a_definition_when_already_exists() {
-        when(this.serviceDefinitionRepository.exists("https://amazon.com")).thenReturn(true);
+        when(this.serviceDefinitionRepository.exists(URL_NAME)).thenReturn(true);
         this.serviceDefinitions.create(new ServiceDefinition("https://amazon.com"));
         verify(this.serviceDefinitionRepository, never()).save(any());
     }
@@ -33,5 +34,13 @@ public class ServiceDefinitionsTest {
         when(this.serviceDefinitionRepository.exists(URL_NAME)).thenReturn(false);
         this.serviceDefinitions.create(new ServiceDefinition("https://amazon.com"));
         verify(this.serviceDefinitionRepository, times(1)).save(any());
+    }
+
+    @Test
+    public void should_retrieve_definition_when_exists() {
+        when(this.serviceDefinitionRepository.exists(URL_NAME)).thenReturn(true);
+        final ServiceDefinition actual = this.serviceDefinitions.get(URL_NAME);
+        final ServiceDefinition expected = new ServiceDefinition(URL_NAME);
+        assertEquals(expected, actual);
     }
 }
