@@ -28,6 +28,7 @@ public final class ServiceMonitor {
                     final Status currentStatus = this.serviceStatuses.find(urlName);
                     final Status newStatus = serviceHealth.check(urlName);
                     if (currentStatus != newStatus) {
+                        this.serviceStatuses.save(urlName, newStatus);
                         this.eventBus.publish(new StatusChanged(urlName, newStatus));
                     }
                 });
