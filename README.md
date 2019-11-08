@@ -39,7 +39,7 @@ The modules are splitted into two:
  
  - keep the domain free of any infrastructure related details
     - in order to be able to log and/or publish metrics [domain probe](https://martinfowler.com/articles/domain-oriented-observability.html)
-     should be used (See `com.livi.servicepoller.domain.ServicePollerInstrumentation` example)
+     should be used (See `com.livi.servicepoller.domain.common.ServicePollerInstrumentation` example)
  - the `master` branch is protected, any pull request can be proposed, they will be merge if the CI is green and after a review
  - please update the READMEs as soon as the usage or implementation change
  - if you have any comment or issue, please file either a pull request or you can create an issue

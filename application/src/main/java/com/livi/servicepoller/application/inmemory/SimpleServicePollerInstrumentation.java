@@ -1,7 +1,7 @@
 package com.livi.servicepoller.application.inmemory;
 
 import com.livi.servicepoller.domain.ServiceDefinition;
-import com.livi.servicepoller.domain.ServicePollerInstrumentation;
+import com.livi.servicepoller.domain.common.ServicePollerInstrumentation;
 import org.slf4j.Logger;
 
 import static java.lang.String.format;
@@ -12,13 +12,13 @@ public final class SimpleServicePollerInstrumentation implements ServicePollerIn
 
 
     @Override
-    public void creatingServiceDefinition(final ServiceDefinition definition) {
-        LOGGER.info(format("Creating service definition %s", definition.urlName()));
+    public void registeringServiceDefinition(final ServiceDefinition definition) {
+        LOGGER.info(format("Registering service definition %s", definition.url()));
     }
 
     @Override
-    public void serviceDefinitionCreated(final ServiceDefinition definition) {
-        LOGGER.info(format("Service definition %s created", definition.urlName()));
+    public void serviceDefinitionRegistered(final ServiceDefinition definition) {
+        LOGGER.info(format("Service definition %s registered", definition.url()));
     }
 
     @Override
@@ -33,11 +33,11 @@ public final class SimpleServicePollerInstrumentation implements ServicePollerIn
 
     @Override
     public void checkingStatusFor(final ServiceDefinition definition) {
-        LOGGER.debug(format("Checking status for %s", definition.urlName()));
+        LOGGER.debug(format("Checking status for %s", definition.url()));
     }
 
     @Override
     public void statusCheckedFor(final ServiceDefinition definition) {
-        LOGGER.debug(format("Status checked for %s", definition.urlName()));
+        LOGGER.debug(format("Status checked for %s", definition.url()));
     }
 }

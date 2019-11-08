@@ -10,12 +10,12 @@ public final class InMemoryServiceStatuses implements ServiceStatuses {
     private Map<String, Status> statuses = new HashMap<>();
 
     @Override
-    public Status find(final String urlName) {
-        return this.statuses.getOrDefault(urlName, Status.UKNOWN);
+    public Status find(final String url) {
+        return this.statuses.getOrDefault(url, Status.UKNOWN);
     }
 
     @Override
-    public void save(final String urlName, final Status status) {
-        this.statuses.put(urlName, status);
+    public void save(final String url, final Status status) {
+        this.statuses.put(url, status);
     }
 }

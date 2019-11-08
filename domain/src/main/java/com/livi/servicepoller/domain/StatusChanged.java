@@ -6,19 +6,11 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 public final class StatusChanged {
-    private final String urlName;
+    private final String url;
     private final Status newStatus;
 
-    public StatusChanged(final String urlName, final Status newStatus) {
-        this.urlName = urlName;
+    public StatusChanged(final String url, final Status newStatus) {
+        this.url = url;
         this.newStatus = newStatus;
-    }
-
-    public String urlName() {
-        return this.urlName;
-    }
-
-    public Status newStatus() {
-        return this.newStatus;
     }
 }

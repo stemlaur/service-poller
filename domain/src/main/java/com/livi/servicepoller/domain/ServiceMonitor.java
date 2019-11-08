@@ -1,41 +1,44 @@
 package com.livi.servicepoller.domain;
 
+import com.livi.servicepoller.domain.common.EventBus;
+import com.livi.servicepoller.domain.common.ServicePollerInstrumentation;
+
 /**
- * The service monitor is responsible of call heath check for each
- * services definition and publishes whether a status has changed.
+ * The ServiceMonitor is responsible of calling heath checks for each
+ * service definition and publishes whether a status has changed.
  */
 public final class ServiceMonitor {
     private final ServicePollerInstrumentation instrumentation;
     private final EventBus eventBus;
-    private final ServiceDefinitions serviceDefinitions;
+    private final ServiceRegistry serviceRegistry;
     private final ServiceStatuses serviceStatuses;
     private final ServiceHealth serviceHealth;
 
     public ServiceMonitor(final ServicePollerInstrumentation instrumentation,
                           final EventBus eventBus,
-                          final ServiceDefinitions serviceDefinitions,
+                          final ServiceRegistry serviceRegistry,
                           final ServiceStatuses serviceStatuses,
                           final ServiceHealth serviceHealth) {
         this.instrumentation = instrumentation;
         this.eventBus = eventBus;
-        this.serviceDefinitions = serviceDefinitions;
+        this.serviceRegistry = serviceRegistry;
         this.serviceStatuses = serviceStatuses;
         this.serviceHealth = serviceHealth;
     }
 
     public void checkStatuses() {
         this.instrumentation.checkingStatuses();
-        this.serviceDefinitions.findAll()
+        this.serviceRegistry.findAll()
                 .forEach(serviceDefinition -> {
                     this.instrumentation.checkingStatusFor(serviceDefinition);
 
-                    final String urlName = serviceDefinition.urlName();
-                    final Status currentStatus = this.serviceStatuses.find(urlName);
-                    final Status newStatus = serviceHealth.check(urlName);
+                    final String url = serviceDefinition.url();
+                    final Status currentStatus = this.serviceStatuses.find(url);
+                    final Status newStatus = serviceHealth.check(url);
 
                     if (currentStatus != newStatus) {
-                        this.serviceStatuses.save(urlName, newStatus);
-                        this.eventBus.publish(new StatusChanged(urlName, newStatus));
+                        this.serviceStatuses.save(url, newStatus);
+                        this.eventBus.publish(new StatusChanged(url, newStatus));
                     }
 
                     this.instrumentation.statusCheckedFor(serviceDefinition);

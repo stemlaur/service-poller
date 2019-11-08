@@ -1,7 +1,7 @@
 package com.livi.servicepoller.domain;
 
 public interface ServiceStatuses {
-    Status find(String urlName);
+    Status find(String url);
 
-    void save(String urlName, Status ok);
+    void save(String url, Status ok);
 }

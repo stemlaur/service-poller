@@ -1,4 +1,4 @@
-package com.livi.servicepoller.domain;
+package com.livi.servicepoller.domain.common;
 
 public interface EventBus {
 

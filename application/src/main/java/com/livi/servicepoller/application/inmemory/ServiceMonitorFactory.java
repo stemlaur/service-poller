@@ -1,18 +1,18 @@
 package com.livi.servicepoller.application.inmemory;
 
-import com.livi.servicepoller.domain.ServiceDefinitions;
+import com.livi.servicepoller.domain.ServiceRegistry;
 import com.livi.servicepoller.domain.ServiceMonitor;
-import com.livi.servicepoller.domain.ServicePollerInstrumentation;
+import com.livi.servicepoller.domain.common.ServicePollerInstrumentation;
 
 public final class ServiceMonitorFactory {
 
     public static ServiceMonitor inMemory(final ServicePollerInstrumentation instrumentation,
-                                          final ServiceDefinitions serviceDefinitions,
+                                          final ServiceRegistry serviceRegistry,
                                           final InMemoryServiceStatuses serviceStatuses) {
         return new ServiceMonitor(
                 instrumentation,
                 new InMemoryEventBus(),
-                serviceDefinitions,
+                serviceRegistry,
                 serviceStatuses,
                 new FakeServiceHealth()
         );

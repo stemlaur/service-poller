@@ -6,18 +6,18 @@ import org.apache.commons.lang3.Validate;
 
 /**
  * This entity represents the definition of a service.
- * A service is unique regarding its urlName.
+ * A service is unique regarding its url.
  */
 @EqualsAndHashCode
 @ToString
 public final class ServiceDefinition {
-    private final String urlName;
+    private final String url;
 
-    public ServiceDefinition(final String urlName) {
-        this.urlName = Validate.notBlank(urlName);
+    public ServiceDefinition(final String url) {
+        this.url = Validate.notBlank(url);
     }
 
-    public String urlName() {
-        return this.urlName;
+    public String url() {
+        return this.url;
     }
 }
