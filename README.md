@@ -14,6 +14,11 @@ To use the service, please run the following commands:
 > java -jar application/target/application-1.0-SNAPSHOT-jar-with-dependencies.jar
 ```
 
+on a serapate console you can access to the logs by typing:
+```bash
+> tail -f app.log
+```
+
 For now the application registers two services and periodically checks their health statuses
 and if it changes, it will display it on screen. The health check are returned randomly.
 
