@@ -1,9 +1,11 @@
-package com.livi.servicepoller.domain;
+package com.livi.servicepoller.domain.common;
+
+import com.livi.servicepoller.domain.ServiceDefinition;
 
 public interface ServicePollerInstrumentation {
-    void creatingServiceDefinition(ServiceDefinition definition);
+    void registeringServiceDefinition(ServiceDefinition definition);
 
-    void serviceDefinitionCreated(ServiceDefinition definition);
+    void serviceDefinitionRegistered(ServiceDefinition definition);
 
     void checkingStatuses();
 

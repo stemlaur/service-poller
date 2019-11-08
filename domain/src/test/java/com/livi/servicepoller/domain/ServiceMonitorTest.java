@@ -1,5 +1,7 @@
 package com.livi.servicepoller.domain;
 
+import com.livi.servicepoller.domain.common.EventBus;
+import com.livi.servicepoller.domain.common.ServicePollerInstrumentation;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +22,7 @@ public final class ServiceMonitorTest {
     @Mock
     private EventBus eventBus;
     @Mock
-    private ServiceDefinitions serviceDefinitions;
+    private ServiceRegistry serviceRegistry;
     @Mock
     private ServiceStatuses serviceStatuses;
     @Mock
@@ -28,12 +30,12 @@ public final class ServiceMonitorTest {
 
     @Before
     public void setUp() {
-        this.serviceMonitor = new ServiceMonitor(instrumentation, this.eventBus, this.serviceDefinitions, this.serviceStatuses, this.serviceHealth);
+        this.serviceMonitor = new ServiceMonitor(instrumentation, this.eventBus, this.serviceRegistry, this.serviceStatuses, this.serviceHealth);
     }
 
     @Test
     public void should_emit_status_changed_when_current_status_is_different() {
-        when(this.serviceDefinitions.findAll()).thenReturn(Collections.singleton(new ServiceDefinition("https://www.livi.fr/")));
+        when(this.serviceRegistry.findAll()).thenReturn(Collections.singleton(new ServiceDefinition("https://www.livi.fr/")));
         when(this.serviceStatuses.find(URL_NAME)).thenReturn(Status.UKNOWN);
         when(this.serviceHealth.check("https://www.livi.fr/")).thenReturn(Status.OK);
 
@@ -44,7 +46,7 @@ public final class ServiceMonitorTest {
 
     @Test
     public void should_not_emit_status_changed_when_current_status_is_the_same() {
-        when(this.serviceDefinitions.findAll()).thenReturn(Collections.singleton(new ServiceDefinition("https://www.livi.fr/")));
+        when(this.serviceRegistry.findAll()).thenReturn(Collections.singleton(new ServiceDefinition("https://www.livi.fr/")));
         when(this.serviceStatuses.find(URL_NAME)).thenReturn(Status.OK);
         when(this.serviceHealth.check("https://www.livi.fr/")).thenReturn(Status.OK);
 
@@ -55,7 +57,7 @@ public final class ServiceMonitorTest {
 
     @Test
     public void should_store_new_status_when_current_status_is_different() {
-        when(this.serviceDefinitions.findAll()).thenReturn(Collections.singleton(new ServiceDefinition("https://www.livi.fr/")));
+        when(this.serviceRegistry.findAll()).thenReturn(Collections.singleton(new ServiceDefinition("https://www.livi.fr/")));
         when(this.serviceStatuses.find(URL_NAME)).thenReturn(Status.UKNOWN);
         when(this.serviceHealth.check("https://www.livi.fr/")).thenReturn(Status.OK);
 
@@ -66,7 +68,7 @@ public final class ServiceMonitorTest {
 
     @Test
     public void should_not_store_new_status_when_current_status_is_the_same() {
-        when(this.serviceDefinitions.findAll()).thenReturn(Collections.singleton(new ServiceDefinition("https://www.livi.fr/")));
+        when(this.serviceRegistry.findAll()).thenReturn(Collections.singleton(new ServiceDefinition("https://www.livi.fr/")));
         when(this.serviceStatuses.find(URL_NAME)).thenReturn(Status.OK);
         when(this.serviceHealth.check("https://www.livi.fr/")).thenReturn(Status.OK);
 

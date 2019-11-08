@@ -11,8 +11,8 @@ public final class InMemoryServiceDefinitionRepository implements ServiceDefinit
     private Set<ServiceDefinition> definitions = new HashSet<>();
 
     @Override
-    public boolean exists(final String urlName) {
-        return this.definitions.contains(new ServiceDefinition(urlName));
+    public boolean exists(final String url) {
+        return this.definitions.contains(new ServiceDefinition(url));
     }
 
     @Override

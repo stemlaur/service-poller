@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface ServiceDefinitionRepository {
-    boolean exists(String urlName);
+    boolean exists(String url);
 
     void save(ServiceDefinition definition);
 

@@ -3,6 +3,7 @@ package com.livi.servicepoller.application;
 
 import com.livi.servicepoller.application.inmemory.*;
 import com.livi.servicepoller.domain.*;
+import com.livi.servicepoller.domain.common.ServicePollerInstrumentation;
 
 import java.util.Scanner;
 import java.util.Set;
@@ -12,9 +13,9 @@ public final class Application {
 
     public static void main(String[] args) {
         final ServicePollerInstrumentation instrumentation = new SimpleServicePollerInstrumentation();
-        final ServiceDefinitions serviceDefinitions = new ServiceDefinitions(instrumentation, new InMemoryServiceDefinitionRepository());
+        final ServiceRegistry serviceRegistry = new ServiceRegistry(instrumentation, new InMemoryServiceDefinitionRepository());
         final InMemoryServiceStatuses serviceStatuses = new InMemoryServiceStatuses();
-        final ServiceMonitor serviceMonitor = ServiceMonitorFactory.inMemory(instrumentation, serviceDefinitions, serviceStatuses);
+        final ServiceMonitor serviceMonitor = ServiceMonitorFactory.inMemory(instrumentation, serviceRegistry, serviceStatuses);
         final SimpleCron simpleCron = new SimpleCron(serviceMonitor::checkStatuses);
 
         System.out.println("Welcome to the simple service poller interface:");
@@ -31,7 +32,7 @@ public final class Application {
                 case "1":
                     System.out.println("========== You want to add a service ==========");
                     final String serviceURLToAdd = askUserForTheServiceURL();
-                    serviceDefinitions.create(new ServiceDefinition(serviceURLToAdd));
+                    serviceRegistry.register(new ServiceDefinition(serviceURLToAdd));
                     break;
                 case "2":
                     System.out.println("========== You want to remove a service ==========");
@@ -39,7 +40,7 @@ public final class Application {
                     break;
                 case "3":
                     System.out.println("========== You want to list all services ==========");
-                    listAllServicesToConsole(serviceDefinitions.findAll());
+                    listAllServicesToConsole(serviceRegistry.findAll());
                     break;
                 case "4":
                     System.out.println("========== You want to find the health status of a service ==========");
@@ -64,6 +65,6 @@ public final class Application {
     }
 
     private static void listAllServicesToConsole(final Set<ServiceDefinition> serviceDefinitions) {
-        serviceDefinitions.forEach(sd -> System.out.println(sd.urlName()));
+        serviceDefinitions.forEach(sd -> System.out.println(sd.url()));
     }
 }

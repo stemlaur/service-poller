@@ -7,7 +7,7 @@ import java.util.Random;
 
 public final class FakeServiceHealth implements ServiceHealth {
     @Override
-    public Status check(final String urlName) {
+    public Status check(final String url) {
         return pickRandomStatusNotFairly();
     }
 

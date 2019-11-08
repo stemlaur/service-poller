@@ -1,6 +1,6 @@
 package com.livi.servicepoller.application.inmemory;
 
-import com.livi.servicepoller.domain.EventBus;
+import com.livi.servicepoller.domain.common.EventBus;
 import org.slf4j.Logger;
 
 import static java.lang.String.format;
