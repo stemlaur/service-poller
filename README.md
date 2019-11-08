@@ -19,8 +19,7 @@ on a serapate console you can access to the logs by typing:
 > tail -f app.log
 ```
 
-For now the application registers two services and periodically checks their health statuses
-and if it changes, it will display it on screen. The health check are returned randomly.
+For now the application the health check results are returned randomly.
 
 This usage paragraph will of course change as the project evolves.
 
