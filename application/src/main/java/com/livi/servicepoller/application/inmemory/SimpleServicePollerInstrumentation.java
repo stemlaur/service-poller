@@ -23,21 +23,21 @@ public final class SimpleServicePollerInstrumentation implements ServicePollerIn
 
     @Override
     public void checkingStatuses() {
-        LOGGER.info("Checking all statuses");
+        LOGGER.debug("Checking all statuses");
     }
 
     @Override
     public void statusesChecked() {
-        LOGGER.info("All statuses checked");
+        LOGGER.debug("All statuses checked");
     }
 
     @Override
     public void checkingStatusFor(final ServiceDefinition definition) {
-        LOGGER.info(format("Checking status for %s", definition.urlName()));
+        LOGGER.debug(format("Checking status for %s", definition.urlName()));
     }
 
     @Override
     public void statusCheckedFor(final ServiceDefinition definition) {
-        LOGGER.info(format("Status checked for %s", definition.urlName()));
+        LOGGER.debug(format("Status checked for %s", definition.urlName()));
     }
 }

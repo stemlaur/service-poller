@@ -11,7 +11,7 @@ public final class InMemoryEventBus implements EventBus {
 
     @Override
     public void publish(final Object object) {
-        LOGGER.debug(format("%s published", object));
+        LOGGER.info(format("%s published", object));
     }
 
 }

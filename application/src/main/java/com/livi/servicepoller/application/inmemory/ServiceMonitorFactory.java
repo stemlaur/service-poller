@@ -7,12 +7,13 @@ import com.livi.servicepoller.domain.ServicePollerInstrumentation;
 public final class ServiceMonitorFactory {
 
     public static ServiceMonitor inMemory(final ServicePollerInstrumentation instrumentation,
-                                          final ServiceDefinitions serviceDefinitions) {
+                                          final ServiceDefinitions serviceDefinitions,
+                                          final InMemoryServiceStatuses serviceStatuses) {
         return new ServiceMonitor(
                 instrumentation,
                 new InMemoryEventBus(),
                 serviceDefinitions,
-                new InMemoryServiceStatuses(),
+                serviceStatuses,
                 new FakeServiceHealth()
         );
     }

@@ -6,7 +6,7 @@
             <pattern>%d [%thread] %level %mdc %logger{50} - %msg%n</pattern>
         </encoder>
     </appender>
-    <root level="debug">
+    <root level="info">
         <appender-ref ref="fileAppender" />
     </root>
 </configuration>

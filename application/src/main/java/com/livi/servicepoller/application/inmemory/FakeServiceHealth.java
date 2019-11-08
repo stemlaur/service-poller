@@ -13,7 +13,7 @@ public final class FakeServiceHealth implements ServiceHealth {
 
     private static Status pickRandomStatusNotFairly() {
         final int randomInt = new Random().nextInt(100);
-        if (randomInt < 80) {
+        if (randomInt < 50) {
             return Status.OK;
         } else {
             return Status.FAIL;
