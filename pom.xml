@@ -19,7 +19,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
         <commons-lang3.version>3.9</commons-lang3.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <lombok.version>1.18.10</lombok.version>
         <mockito-core.version>3.0.0</mockito-core.version>
     </properties>
